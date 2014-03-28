@@ -93,21 +93,14 @@ def storkify():
             elders.append(person)
 
 def census():                                   # print out population info
-    """print([person.name for person in popList])
-    print("   Population Size: " + str(len(popList)))
-    print("   Number of males: " + str(numMale))
-    print(" Number of females: " + str(numFemale))
-    print("  Number of adults: " + str(len(adults)))
-    print("  Number of elders: " + str(len(elders)))
-    print("   Number of teens: " + str(len(teens)))
-    print("Number of children: " + str(len(children)))"""
-
+    #ghetto table time
     results = open("censusResults.txt", "w")
     tableName = "NAME"
     print("-" * 41)
     results.write("-" * 41 + "\n")
     print("| " + tableName.center(25) + " | SEX | AGE |")
     results.write("| " + tableName.center(25) + " | SEX | AGE |\n")
+    print("-" * 41)
     results.write("-" * 41 + "\n")
     for each in popList:
         print("| " + each.name.center(25) + " | " + each.sex.center(3) + " | " +
