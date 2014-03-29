@@ -21,6 +21,7 @@ popList = []
 probMale = []
 probFemale = []
 probLast = []
+raceList = ["CAUCASIAN", "BLACK", "HISPANIC", "ASIAN"]
 
 adults = []
 elders = []
@@ -47,7 +48,7 @@ def nameListGenerator():
 
 
 class Person:
-    def __init__(self, first, last, age, sex):
+    def __init__(self, first, last, age, sex, race):
         self.first = first
         self.last = last
         self.name = first + " " + last
@@ -56,6 +57,7 @@ class Person:
             self.sex = "M"
         else:
             self.sex = "F"
+        self.race = race
 
 def storkify():
     global numMale
@@ -80,7 +82,8 @@ def storkify():
         index = int(tools.weighted_choice_b2(probLast))
         last = nameLast[index]
         age = str(random.randint(1, 100))       # determine age (needs updating)
-        person = Person(first, last, age, sex)
+        race = random.choice(raceList)
+        person = Person(first, last, age, sex, race)
         popList.append(person)
         age = int(age)
         if age < 13:                            # split age into groups
@@ -96,19 +99,20 @@ def census():                                   # print out population info
     #ghetto table time
     results = open("censusResults.txt", "w")
     tableName = "NAME"
-    print("-" * 41)
-    results.write("-" * 41 + "\n")
-    print("| " + tableName.center(25) + " | SEX | AGE |")
-    results.write("| " + tableName.center(25) + " | SEX | AGE |\n")
-    print("-" * 41)
-    results.write("-" * 41 + "\n")
+    tableRace = "RACE"
+    #print("-" * 56)
+    results.write("-" * 56 + "\n")
+    #print("| " + tableName.center(25) + " | SEX | AGE | " + tableRace.center(13) + " |")
+    results.write("| " + tableName.center(25) + " | SEX | AGE | "  + tableRace.center(13) + " |\n")
+    #print("-" * 56)
+    results.write("-" * 56 + "\n")
     for each in popList:
-        print("| " + each.name.center(25) + " | " + each.sex.center(3) + " | " +
-        str(each.age.center(3)) + " |")
+        #print("| " + each.name.center(25) + " | " + each.sex.center(3) + " | " +
+        #str(each.age.center(3)) + " |")
         results.write("| " + each.name.center(25) + " | " + each.sex.center(3) + " | " +
-        str(each.age.center(3)) + " |\n")
-        print("-" * 41)
-        results.write("-" * 41 + "\n")
+        str(each.age.center(3)) + " | " + each.race.center(13) + " |\n")
+        #print("-" * 56)
+        results.write("-" * 56 + "\n")
 
 def person():
     nameListGenerator()
