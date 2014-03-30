@@ -119,7 +119,7 @@ def census(sortby):
     elif sortby == 4:
         popList.sort(key = lambda x: x.sex)
 
-    out = "census.csv"
+    out = "data/census.csv"
     data = ["Last, First, Sex, Age, Race".split(',')]
     for each in popList:
         info = "%s,%s,%s,%s,%s" % (each.last, each.first, each.sex, str(each.age), each.race)
@@ -128,7 +128,7 @@ def census(sortby):
     tools.csv_writer(data, out)
 
 
-def person():
+def person(sortby):
     nameListGenerator()
     storkify()
-    census(3)
+    census(sortby)

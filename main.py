@@ -14,11 +14,9 @@ import person, personality
 
 
 def main():
-    for i in range(0,1):
-        p = personality.Personality()
 
     # Create name lists
-    #person.person()
+    person.person(1)
     sys.exit("done!")
 
 
