@@ -9,8 +9,8 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 
-import sys, random
-import main, tools
+import sys, random, csv
+import main, tools, personality
 
 POP_SIZE = 200
 
@@ -22,32 +22,36 @@ probMale = []
 probFemale = []
 probLast = []
 raceList = ["CAUCASIAN", "BLACK", "HISPANIC", "ASIAN"]
+ageWeights = {"children": 22, "youngAdults": 24, "adults": 42, "elders": 10,
+              "extraElderly": 2}
 
 adults = []
 elders = []
-teens = []
+youngAdults =[]
 children = []
+extraElderly = []
 
 
 def nameListGenerator():
     # Create name lists
-    for line in open("male.first.txt"):
+    for line in open("data/male.first.txt"):
         info = line.split()
         nameMale.append(info[0])
         probMale.append(float(info[1]))
 
-    for line in open("female.first.txt"):
+    for line in open("data/female.first.txt"):
         info = line.split()
         nameFemale.append(info[0])
         probFemale.append(float(info[1]))
 
-    for line in open("last.txt"):
+    for line in open("data/last.txt"):
         info = line.split()
         nameLast.append(info[0])
         probLast.append(float(info[1]))
 
 
 class Person:
+
     def __init__(self, first, last, age, sex, race):
         self.first = first
         self.last = last
@@ -62,6 +66,8 @@ class Person:
 def storkify():
     global numMale
     global numFemale
+    global ages
+    ages = [0,0,0,0]
     numMale = 0
     numFemale = 0
     for i in range(0, POP_SIZE):
@@ -81,40 +87,48 @@ def storkify():
         # pick last name
         index = int(tools.weighted_choice_b2(probLast))
         last = nameLast[index]
-        age = str(random.randint(1, 100))       # determine age (needs updating)
+        age = tools.generate_age(ageWeights)      # determine age
+
+        if age == "children":
+            age = random.randint(0, 15)
+            ages[0] += 1
+        elif age == "youngAdults":
+            age = random.randint(16, 29)
+            ages[1] += 1
+        elif age == "adults":
+            age = random.randint(30, 64)
+            ages[2] += 1
+        elif age == "elders":
+            age = random.randint(65, 79)
+            ages[3] += 1
+        else:
+            age = random.randint(80, 100)
+            ages[3] += 1
+        #age = str(age)
         race = random.choice(raceList)
         person = Person(first, last, age, sex, race)
         popList.append(person)
-        age = int(age)
-        if age < 13:                            # split age into groups
-            children.append(person)
-        elif age >= 13 and age < 20:
-            teens.append(person)
-        elif age >= 20 and age < 65:
-            adults.append(person)
-        else:
-            elders.append(person)
 
-def census():                                   # print out population info
-    #ghetto table time
-    results = open("censusResults.txt", "w")
-    tableName = "NAME"
-    tableRace = "RACE"
-    #print("-" * 56)
-    results.write("-" * 56 + "\n")
-    #print("| " + tableName.center(25) + " | SEX | AGE | " + tableRace.center(13) + " |")
-    results.write("| " + tableName.center(25) + " | SEX | AGE | "  + tableRace.center(13) + " |\n")
-    #print("-" * 56)
-    results.write("-" * 56 + "\n")
+def census(sortby):
+    if sortby == 1:
+        popList.sort(key = lambda x: x.last)
+    elif sortby == 2:
+        popList.sort(key = lambda x: x.first)
+    elif sortby == 3:
+        popList.sort(key = lambda x: x.age)
+    elif sortby == 4:
+        popList.sort(key = lambda x: x.sex)
+
+    out = "census.csv"
+    data = ["Last, First, Sex, Age, Race".split(',')]
     for each in popList:
-        #print("| " + each.name.center(25) + " | " + each.sex.center(3) + " | " +
-        #str(each.age.center(3)) + " |")
-        results.write("| " + each.name.center(25) + " | " + each.sex.center(3) + " | " +
-        str(each.age.center(3)) + " | " + each.race.center(13) + " |\n")
-        #print("-" * 56)
-        results.write("-" * 56 + "\n")
+        info = "%s,%s,%s,%s,%s" % (each.last, each.first, each.sex, str(each.age), each.race)
+        info = info.split(",")
+        data.append(info)
+    tools.csv_writer(data, out)
+
 
 def person():
     nameListGenerator()
     storkify()
-    census()
+    census(3)
