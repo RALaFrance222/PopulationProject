@@ -62,6 +62,26 @@ class Person:
         else:
             self.sex = "F"
         self.race = race
+        chooseInterests(self)
+
+    def chooseInterests(self):
+        interests = []
+        self.likes = []
+        self.dislikes = []
+
+        for line in open("data/interests.txt"):
+            line = line.rstrip()
+            interests.append(line)
+
+        for i in range(0,3):
+            # choose a like
+            choice = random.choice(interests)
+            self.likes.append(choice)
+            interests.remove(choice)
+            # choose a dislike
+            choice = random.choice(interests)
+            self.dislikes.append(choice)
+            interests.remove(choice)
 
 def storkify():
     global numMale

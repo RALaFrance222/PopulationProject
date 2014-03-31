@@ -1,11 +1,47 @@
 dogs
 cats
-food
 movies
 music
+celebrities
+working out
 sleep
 video games
 beer
 running
 biking
-sports
+football
+soccer
+baseball
+basketball
+books
+computers
+snakes
+bugs
+traveling
+cooking
+drinking
+playing music
+singing
+fishing
+hunting
+boxing
+wrestling
+driving
+social media
+cleaning
+fashion
+painting
+photography
+writing
+holidays
+reality tv
+smoking
+extreme sports
+browsing the web
+studying
+desserts
+hiking
+sex
+partying
+dancing
+poetry
