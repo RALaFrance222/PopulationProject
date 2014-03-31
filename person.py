@@ -108,6 +108,8 @@ def storkify():
         race = random.choice(raceList)
         person = Person(first, last, age, sex, race)
         popList.append(person)
+        
+        #add personality
 
 def census(sortby):
     if sortby == 1:
@@ -126,6 +128,23 @@ def census(sortby):
         info = info.split(",")
         data.append(info)
     tools.csv_writer(data, out)
+
+def chooseInterests(likes, dislikes):
+    interests = []
+    
+    for line in open("data/interests.txt"):
+        line = line.rstrip()
+        interests.append(line)
+
+    for i in range(0,3):
+        # choose a like
+        choice = random.choice(interests)
+        self.likes.append(choice)
+        interests.remove(choice)
+        # choose a dislike
+        choice = random.choice(interests)
+        self.dislikes.append(choice)
+        interests.remove(choice)
 
 
 def person(sortby):
