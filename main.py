@@ -10,13 +10,14 @@
 #-------------------------------------------------------------------------------
 
 import sys, random
-import person, personality
+import person, community
 
 
 def main():
 
     # Create name lists
     person.person(1)
+    community.communify(1)
     sys.exit("done!")
 
 
