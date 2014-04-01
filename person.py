@@ -62,7 +62,7 @@ class Person:
         else:
             self.sex = "F"
         self.race = race
-        chooseInterests(self)
+        #chooseInterests(self)
 
     def chooseInterests(self):
         interests = []
@@ -83,14 +83,14 @@ class Person:
             self.dislikes.append(choice)
             interests.remove(choice)
 
-def storkify():
+def storkify(popCap = POP_SIZE):
     global numMale
     global numFemale
     global ages
     ages = [0,0,0,0]
     numMale = 0
     numFemale = 0
-    for i in range(0, POP_SIZE):
+    for i in range(0, popCap):
         sex = random.randint(0,1)
         # decide if male or female, pick first name
         if sex == 0:
@@ -128,6 +128,9 @@ def storkify():
         race = random.choice(raceList)
         person = Person(first, last, age, sex, race)
         popList.append(person)
+        
+        #add personality
+    return popList
 
 def census(sortby):
     if sortby == 1:
@@ -146,6 +149,23 @@ def census(sortby):
         info = info.split(",")
         data.append(info)
     tools.csv_writer(data, out)
+
+def chooseInterests(likes, dislikes):
+    interests = []
+    
+    for line in open("data/interests.txt"):
+        line = line.rstrip()
+        interests.append(line)
+
+    for i in range(0,3):
+        # choose a like
+        choice = random.choice(interests)
+        self.likes.append(choice)
+        interests.remove(choice)
+        # choose a dislike
+        choice = random.choice(interests)
+        self.dislikes.append(choice)
+        interests.remove(choice)
 
 
 def person(sortby):
