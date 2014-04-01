@@ -10,7 +10,7 @@
 #-------------------------------------------------------------------------------
 
 import sys, random, csv
-import main, tools, personality
+import main, tools
 
 POP_SIZE = 200
 

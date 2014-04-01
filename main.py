@@ -10,14 +10,16 @@
 #-------------------------------------------------------------------------------
 
 import sys, random
-import person, personality
+import person
 
 
 def main():
 
     # Create name lists
-    person.person(1)
+    #person.person(1)
     sys.exit("done!")
+
+
 
 
 if __name__ == '__main__':
