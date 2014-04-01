@@ -1,0 +1,56 @@
+doctor 
+nurse 
+elementary teacher 
+secondary teacher 
+mayor 
+cook 
+construction worker 
+farmer 
+actor 
+musician 
+repairman
+banker
+accountant
+waiter
+policeman
+fireman
+sheriff 
+deputy 
+lawyer
+teller
+mechanic
+janitor
+electrician
+engineer
+plumber
+bartender
+forester
+judge
+athlete
+barber
+hairdresser
+pharmacist
+dentist
+artist
+coach
+scientist
+sailor 
+cashier
+butcher
+vet
+general 
+soldier
+writer
+director
+librarian
+weatherman
+baker
+carpenter
+sorcerer 
+politician
+news anchor
+reporter
+lumberjack
+salesman
+architect
+landscaper
